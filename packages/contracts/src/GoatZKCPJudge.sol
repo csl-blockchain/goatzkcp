@@ -9,12 +9,12 @@ import "./Events.sol";
 
 contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
-    address public factory; // factory
+    saddress public factory; // factory
 
     // @notice variables set by the factory
-    address public seller; // seller
-    address public buyer; // buyer
-    uint256 public price; // price
+    saddress public seller; // seller
+    saddress public buyer; // buyer
+    suint256 public price; // price
 
     // @notice variables set by the buyer
     bytes32 public hashZ;
@@ -40,10 +40,10 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     }
 
     /// @notice Factory initialize the contract
-    function initialize(address _seller, address _buyer, uint256 _price) external {
+    function initialize(saddress _seller, saddress _buyer, suint256 _price) external {
         require(msg.sender == factory, 'GoatZKCP: only GoatZKCPFactory can initialize the contract');
-        require(_seller != address(0), "GoatZKCP: invalid address.");
-        require(_buyer != address(0), "GoatZKCP: invalid address.");
+        require(_seller != saddress(0), "GoatZKCP: invalid address.");
+        require(_buyer != saddress(0), "GoatZKCP: invalid address.");
         factory = msg.sender;
         buyer = _buyer;
         seller = _seller;

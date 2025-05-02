@@ -8,15 +8,15 @@ import "./GoatZKCPJudge.sol";
 /// @author
 contract GoatZKCPFactory is Ownable {
 
-    event ExchangeCreate(address indexed judge, address indexed seller,  address indexed buyer, uint256 price, uint256 timestamp);
+    event ExchangeCreate(saddress indexed judge, saddress indexed seller,  saddress indexed buyer, suint256 price, uint256 timestamp);
 
-    mapping(address => mapping(address => mapping(uint256 => address))) public getJudges;
-    address[] judges;
+    mapping(saddress => mapping(saddress => mapping(suint256 => saddress))) public getJudges;
+    saddress[] judges;
 
     /// @notice We recommend buyer to create the exchange
-    function createExchange(address seller, uint256 price) external returns (address judge) {
-        require(seller != address(0), 'GoatZKCP: seller is zero address');
-        address buyer = msg.sender; // msg.sender is the buyer
+    function createExchange(saddress seller, suint256 price) external returns (saddress judge) {
+        require(seller != saddress(0), 'GoatZKCP: seller is zero address');
+        saddress buyer = msg.sender; // msg.sender is the buyer
         uint256 timestamp = block.timestamp;
         bytes memory bytecode = type(GoatZKCPJudge).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(seller, buyer, price));

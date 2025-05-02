@@ -6,9 +6,9 @@ pragma solidity ^0.8.9;
 
 contract Lock {
     uint public unlockTime;
-    address payable public owner;
+    saddress payable public owner;
 
-    event Withdrawal(uint amount, uint when);
+    event Withdrawal(suint amount, uint when);
 
     constructor(uint _unlockTime) payable {
         require(
@@ -27,8 +27,8 @@ contract Lock {
         require(block.timestamp >= unlockTime, "You can't withdraw yet");
         require(msg.sender == owner, "You aren't the owner");
 
-        emit Withdrawal(address(this).balance, block.timestamp);
+        emit Withdrawal(saddress(this).balance, block.timestamp);
 
-        owner.transfer(address(this).balance);
+        owner.transfer(saddress(this).balance);
     }
 }
