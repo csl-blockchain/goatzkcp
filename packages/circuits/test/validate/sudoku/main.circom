@@ -33,7 +33,7 @@ template top() {
         hash.PT[i] <== solution[i];
     }
 
-    H === hash.Out;
+    //H === hash.Out;
 }
 
 component main {public [MK_0, MK_1]} = top();

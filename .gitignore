@@ -17,3 +17,5 @@ node_modules/
 
 calc.py
 **/__pycache__
+
+**/.DS_Store
