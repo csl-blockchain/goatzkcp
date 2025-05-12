@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 /// @author
 interface IGoatZKCPJudge {
 
-    function initialize(saddress _seller, saddress _buyer, suint256 _price) external;
+    function initialize(address _seller, address _buyer, uint256 _price) external;
 
     function init(bytes32 _hashZ) payable external;
 
