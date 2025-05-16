@@ -1,34 +1,101 @@
-Run the Local Network
+## Prerequisites
+
+### Rust and Cargo
+
+1. Install Rust and Cargo
+
+```bash
+# install rust and cargo
+curl https://sh.rustup.rs -sSf | sh
 ```
+
+2. Download and execute the sfoundryup installation script
+
+```bash
+curl -L \
+     -H "Accept: application/vnd.github.v3.raw" \
+     "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
+source ~/.zshenv  # or ~/.bashrc or ~/.zshrc
+```
+
+3. Install sforge, sanvil, ssolc. Expect this to take between 5-20 minutes depending on your machine.
+
+```bash
+sfoundryup
+source ~/.zshenv  # or ~/.bashrc or ~/.zshrc
+```
+
+4. Remove old build artifacts in existing projects.
+
+```bash
+sforge clean  # run in your project's contract directory
+```
+
+## Running the Smart Contracts
+
+Open two terminals.
+
+### The following commands will be ran on terminal 1
+
+1. Open up a new terminal and run the local network
+```bash
 sanvil
 ```
 
-Compile the Smart Contracts
+### The following commands will be ran on terminal 2
+
+1. Set the environment variables from `.env`
+
+```bash
+cd packages/contracts/
+cp .env.example .env
 ```
+
+
+2. Ensure the contracts has no syntax / solidity errors, run
+
+Compile the Smart Contracts
+
+```bash
 sforge build
 ```
 
+3. Ensure contract tests are passing. From this directory, run
+
 Run the Tests (if exists)
-```
+
+```bash
 sforge test
 ```
 
-Deploying GoatZKCPFactory
+4. Set the environment variables, run
+
+```bash
+source .env
 ```
+
+
+5. Deploy the smart contracts, run
+
+Deploying GoatZKCPFactory
+
+```bash
 ❯ sforge script script/GoatZKCPFactory.s.sol:GoatZKCPFactoryScript \
       --rpc-url $RPC_URL \
       --broadcast
 ```
 
 Deploying GoatZKCPJudge
-```
+
+```bash
 ❯ sforge script script/GoatZKCPJudge.s.sol:GoatZKCPJudgeScript \    
       --rpc-url $RPC_URL \
       --broadcast
 ```
 
 Deploying Lock
-```
+
+```bash
 ❯ sforge script script/Lock.s.sol:LockScript \                      
       --rpc-url $RPC_URL \
       --broadcast
