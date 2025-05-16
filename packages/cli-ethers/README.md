@@ -12,4 +12,6 @@ To run:
 bun run index.ts
 ```
 
-This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Notes
+
+If you have trouble reading the smart contract, try deleting the `broadcast` and `out` folders in the `packages/contracts` directory and try rebuilding + redeploying the contract.

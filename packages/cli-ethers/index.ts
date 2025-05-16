@@ -84,7 +84,7 @@ const lockAbiFile = join(
 
 /* ------ Scenario ------ */
 // Initialize Participants Data
-const SELLER = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
+const SELLER = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' // Fill in addresses with the ones provided after running `sanvil`
 const BUYER = '0x70997970C51812dc3A010C7d01b50e0d17dc79C8'
 const PRICE = 10
 
