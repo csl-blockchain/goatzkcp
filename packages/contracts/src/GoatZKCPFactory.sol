@@ -18,7 +18,10 @@ contract GoatZKCPFactory is Ownable {
         require(seller != address(0), 'GoatZKCP: seller is zero address');
         address buyer = msg.sender; // msg.sender is the buyer
         uint256 timestamp = block.timestamp;
-        bytes memory bytecode = type(GoatZKCPJudge).creationCode;
+        bytes memory bytecode = abi.encodePacked(
+            type(GoatZKCPJudge).creationCode,
+            abi.encode(price)
+            );
         bytes32 salt = keccak256(abi.encodePacked(seller, buyer, price));
         assembly {
             judge := create2(0, add(bytecode, 32), mload(bytecode), salt)
@@ -28,7 +31,7 @@ contract GoatZKCPFactory is Ownable {
         getJudges[buyer][seller][timestamp] = judge;
         judges.push(judge);
         
-        emit ExchangeCreate(judge, seller, buyer, price, timestamp);
+        emit ExchangeCreate(judge, seller, buyer, uint64(price), timestamp);
     }
 
     function judgesLength() external view returns (uint) {

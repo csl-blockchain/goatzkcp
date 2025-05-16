@@ -23,7 +23,7 @@ sforge test
 
 ```bash
 source .env
-sforge script script/Walnut.s.sol:WalnutScript \
+sforge script script/GoatZKCPFactory.s.sol:GoatZKCPFactoryScript \
       --rpc-url $RPC_URL \
       --broadcast
 ```

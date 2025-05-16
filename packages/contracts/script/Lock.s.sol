@@ -4,17 +4,20 @@ pragma solidity ^0.8.13;
 import {Script, console} from "forge-std/Script.sol";
 import {Lock} from "../src/Lock.sol";
 
-contract GoatZKCPScript is Script {
+contract LockScript is Script {
     uint256 currentTimestampInSeconds = block.timestamp / 1000 + (block.timestamp % 1000 == 0 ? 0 : 1);
-    uint256 ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-    uint256 unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
-    Lock public lock;
+    uint256 ONE_DAY_IN_SECS = 1 * 24 * 60 * 60;
+    uint256 unlockTime = currentTimestampInSeconds + ONE_DAY_IN_SECS;
 
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVKEY");
+        uint256 deployerPrivateKey = vm.envUint("PRIVKEY"); // Load deployer's private key
 
         vm.startBroadcast(deployerPrivateKey);
-        lock = new Lock(unlockTime);
+
+        Lock lock = new Lock(unlockTime);
+        
+        console.log("Lock deployed at:", address(lock));
+
         vm.stopBroadcast();
     }
 }

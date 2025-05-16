@@ -11,20 +11,20 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
     address public factory; // factory
 
-    // @notice variables set by the factory
+    /// @notice variables set by the factory
     address public seller; // seller
     address public buyer; // buyer
-    uint256 public price; // price
+    uint256 private price; // price
 
-    // @notice variables set by the buyer
+    /// @notice variables set by the buyer
     bytes32 public hashZ;
 
-    // @notice timestamps
+    /// @notice timestamps
     uint256 public t0;
     uint256 public t1;
     uint256 public t2;
 
-    // @notice status of the exchange
+    /// @notice status of the exchange
     ExchangeStatus public status;
 
     /// @notice Contract statuses
@@ -57,7 +57,7 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     function init(bytes32 _hashZ) payable nonReentrant external {
         require(msg.sender == buyer, "GoatZKCP: invalid initializer.");
         require(status == ExchangeStatus.uninitialized, "GoatZKCP: invalid contract status.");
-        require(msg.value >= price, "GoatZKCP: payment not enough.");
+        require(uint64(msg.value) >= price, "GoatZKCP: payment not enough.");
 
         // set Hash of Z
         hashZ = _hashZ;
@@ -79,7 +79,7 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         bool success = Groth16Core.verify();
         if(success) {
             // transfer payment to seller
-            payable(seller).transfer(price);
+            payable(seller).transfer(uint64(price));
             // update contract state
             status = ExchangeStatus.finished;
 
@@ -97,10 +97,16 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         t2 = block.timestamp;
         require(t2 > t0 + LIMIT_TIME_TAU, "GoatZKCP: invalid refund operation.");
         // refund buyer
-        payable(buyer).transfer(price);
+        payable(buyer).transfer(uint64(price));
         // update contract state
         status = ExchangeStatus.expired;
 
         emit ExchangeRefund(t2);
+    }
+
+    /// Return unshielded price callable only by seller or buyer
+    function checkPrice() external view returns (uint64) {
+        require(msg.sender == buyer || msg.sender == seller, 'GoatZKCP: only the buyer or the seller can check the price.');
+        return uint64(price);
     }
 }

@@ -31,13 +31,13 @@ async function main() {
   const chain =
     process.env.CHAIN_ID === sanvil.id.toString() ? sanvil : seismicDevnet
 
-  const players = [
+  const participants = [
     { name: 'Alice', privateKey: process.env.ALICE_PRIVKEY! },
     { name: 'Bob', privateKey: process.env.BOB_PRIVKEY! },
   ]
 
   const app = new App({
-    players,
+    participants,
     wallet: {
       chain,
       rpcUrl: process.env.RPC_URL!,
@@ -50,39 +50,10 @@ async function main() {
 
   await app.init()
 
-  // Simulating multiplayer interactions
-  console.log('=== Round 1 ===')
-  await app.shake('Alice', 2)
-  await app.hit('Alice')
-  await app.shake('Alice', 4)
-  await app.hit('Alice')
-  await app.shake('Alice', 1)
-  await app.hit('Alice')
-
-  // Alice looks at the number in round 1, should be 7
-  await app.look('Alice')
-
-  console.log('=== Round 2 ===')
-  await app.reset('Bob')
-  await app.hit('Bob')
-  await app.shake('Bob', 1)
-  await app.hit('Bob')
-  await app.shake('Bob', 2)
-  await app.hit('Bob')
-
-  // Bob looks at the number in round 2, should be 3
-  await app.look('Bob')
-
-  // Alice tries to look in round 2, should fail by reverting
-  console.log('=== Testing Access Control ===')
-  console.log("Attempting Alice's look() in Bob's round (should revert)")
-  try {
-    await app.look('Alice')
-    console.error('❌ Expected look() to revert but it succeeded')
-    process.exit(1)
-  } catch (error) {
-    console.log('✅ Received expected revert')
-  }
+  // Simulating participant transactions
+  console.log('=== Starting transaction ===')
+  // app.createExchange('Alice', 10)
+  app.getAddress('Alice')
 }
 
 main()

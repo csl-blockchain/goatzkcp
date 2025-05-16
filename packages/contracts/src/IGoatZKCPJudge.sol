@@ -13,4 +13,5 @@ interface IGoatZKCPJudge {
 
     function refund() external;
 
+    function checkPrice() external view returns (uint64);
 }
