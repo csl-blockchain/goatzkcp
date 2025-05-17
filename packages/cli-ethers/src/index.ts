@@ -144,6 +144,9 @@ console.log(`Verifier address: ${VERIFIER_ADDRESS}\n`);
 const hashZ =
   '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef' // replace with actual hash
 
+let judgeStatus  = await judgeContractWithBuyer.getStatus()
+console.log(judgeStatus)
+
 // ------ Buyer Independently Verifies Hz and Sends hz and Lock to Contract -----
 // Call init with payable amount = PRICE (make sure to send in wei)
 const tx_Init = await judgeContractWithBuyer.init(hashZ, {
@@ -154,7 +157,7 @@ const tx_Init = await judgeContractWithBuyer.init(hashZ, {
 BUYER_BALANCE = await provider.getBalance(BUYER)
 SELLER_BALANCE = await provider.getBalance(SELLER)
 
-console.log('----- Buyer creates Lock for payment -----')
+console.log('\n----- Buyer creates Lock for payment -----')
 console.log(
   `Create exchange buyer balance: ${ethers.utils.formatEther(BUYER_BALANCE)}`
 )
@@ -164,11 +167,15 @@ console.log(
 
 const receipt_Init = await tx_Init.wait()
 
-console.log('Init transaction mined:', receipt_Init.transactionHash)
+console.log(`Init transaction mined: ${receipt_Init.transactionHash}\n`)
+
+
+judgeStatus  = await judgeContractWithBuyer.getStatus()
+console.log(judgeStatus)
 
 // You don't need a signer for reading data
 const lockAddress = await judgeContractWithBuyer.getLockContract()
-console.log('Lock address:', lockAddress)
+console.log('\nLock address:', lockAddress)
 
 // You don't need a signer for reading data
 const sellerAddress = await judgeContractWithBuyer.getSeller()
@@ -197,4 +204,8 @@ BUYER_BALANCE = await provider.getBalance(BUYER)
 SELLER_BALANCE = await provider.getBalance(SELLER)
 
 console.log(`Final buyer balance: ${ethers.utils.formatEther(BUYER_BALANCE)}`)
-console.log(`Final seller balance: ${ethers.utils.formatEther(SELLER_BALANCE)}`)
+console.log(`Final seller balance: ${ethers.utils.formatEther(SELLER_BALANCE)}\n`)
+
+
+judgeStatus  = await judgeContractWithBuyer.getStatus()
+console.log(judgeStatus)
