@@ -56,4 +56,4 @@ template Enc(nPairs) {
     }
 }
 
-// component main {public [MK_0, MK_1]} = Enc(70);
+//component main {public [MK_0, MK_1]} = Enc(70);
