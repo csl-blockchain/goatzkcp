@@ -5,8 +5,8 @@ pragma solidity ^0.8.0;
 /// @author
 library Groth16Core {
 
-    function verify() public pure returns (sbool) {
-        return sbool(true);
+    function verify() public pure returns (bool) {
+        return true;
     }
 
 }

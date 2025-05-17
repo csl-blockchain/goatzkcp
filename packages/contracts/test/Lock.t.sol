@@ -28,23 +28,23 @@ contract LockTest is Test {
         otherAccount = address(0xABCD);
 
         vm.deal(owner, lockedAmount * 2);
-        lock = new Lock{value: lockedAmount}(unlockTime);
+        lock = new Lock{value: lockedAmount}(suint256(unlockTime));
     }
 
     // ==================== Deployment Tests ====================
     
     function test_ShouldSetRightUnlockTime() public view {
-        assertEq(lock.unlockTime(), unlockTime);
+        assertEq(lock.getUnlockTime(), unlockTime);
     }
 
     function test_ShouldSetRightOwner() public view {
         // Get the owner from the contract
-        address contractOwner = lock.owner();
+        address contractOwner = lock.getOwner();
         // Print addresses for debugging
         console.log("Expected owner:", owner);
         console.log("Actual owner:", contractOwner);
         // Use the actual owner for the assertion
-        assertEq(contractOwner, lock.owner());
+        assertEq(contractOwner, lock.getOwner());
     }
 
     function test_ShouldReceiveAndStoreFunds() public view {
@@ -56,7 +56,7 @@ contract LockTest is Test {
         
         // Try to deploy with current time, expect revert
         vm.expectRevert("Unlock time should be in the future");
-        new Lock{value: 1}(currentTime);
+        new Lock{value: 1}(suint256(currentTime));
     }
 
     // ==================== Withdrawal Validation Tests ====================
@@ -83,7 +83,7 @@ contract LockTest is Test {
         vm.warp(unlockTime);
         
         // Get the actual owner for this test
-        address contractOwner = lock.owner();
+        address contractOwner = lock.getOwner();
         
         // Prank as the actual owner
         vm.prank(contractOwner);
@@ -101,7 +101,7 @@ contract LockTest is Test {
         vm.warp(unlockTime);
         
         // Get the actual owner
-        address contractOwner = lock.owner();
+        address contractOwner = lock.getOwner();
         
         // Set up event listening
         vm.expectEmit(true, true, false, false);
@@ -122,7 +122,7 @@ contract LockTest is Test {
         vm.warp(unlockTime);
         
         // Get the actual owner
-        address contractOwner = lock.owner();
+        address contractOwner = lock.getOwner();
         
         // Record balances before withdrawal
         uint256 ownerBalanceBefore = contractOwner.balance;

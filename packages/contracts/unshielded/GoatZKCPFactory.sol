@@ -8,21 +8,16 @@ import "./GoatZKCPJudge.sol";
 /// @author
 contract GoatZKCPFactory is Ownable {
 
-    event ExchangeCreate(address indexed judge, address indexed seller, address indexed buyer, uint256 price, uint256 timestamp);
+    event ExchangeCreate(address indexed judge, address indexed seller,  address indexed buyer, uint256 price, uint256 timestamp);
 
-    mapping(address => mapping(address => mapping(suint256 => address))) private getJudgesMap;
+    mapping(address => mapping(address => mapping(uint256 => address))) public getJudges;
     address[] judges;
-
-    /// @notice Getter function for judges mapping
-    function getJudges(address party1, address party2, uint256 timestamp) external view returns (address) {
-        return getJudgesMap[party1][party2][suint256(timestamp)];
-    }
 
     /// @notice We recommend buyer to create the exchange
     function createExchange(address seller, uint256 price) external returns (address judge) {
         require(seller != address(0), 'GoatZKCP: seller is zero address');
         address buyer = msg.sender; // msg.sender is the buyer
-        suint256 timestamp = suint256(block.timestamp);
+        uint256 timestamp = block.timestamp;
         bytes memory bytecode = abi.encodePacked(
             type(GoatZKCPJudge).creationCode,
             abi.encode(price)
@@ -32,11 +27,11 @@ contract GoatZKCPFactory is Ownable {
             judge := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
         IGoatZKCPJudge(judge).initialize(seller, buyer, price);
-        getJudgesMap[seller][buyer][timestamp] = judge;
-        getJudgesMap[buyer][seller][timestamp] = judge;
+        getJudges[seller][buyer][timestamp] = judge;
+        getJudges[buyer][seller][timestamp] = judge;
         judges.push(judge);
         
-        emit ExchangeCreate(judge, seller, buyer, price, uint256(timestamp));
+        emit ExchangeCreate(judge, seller, buyer, uint64(price), timestamp);
     }
 
     function judgesLength() external view returns (uint) {

@@ -14,7 +14,7 @@ contract LockScript is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        Lock lock = new Lock(unlockTime);
+        Lock lock = new Lock(suint256(unlockTime));
         
         console.log("Lock deployed at:", address(lock));
 

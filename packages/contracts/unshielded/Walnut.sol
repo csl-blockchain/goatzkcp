@@ -6,8 +6,8 @@ contract Walnut {
     uint256 shellStrength; // The current shell strength.
     uint256 round; // The current round number.
 
-    suint256 private initialKernel; // The initial hidden kernel value for resets.
-    suint256 private kernel; // The current hidden kernel value.
+    suint256 initialKernel; // The initial hidden kernel value for resets.
+    suint256 kernel; // The current hidden kernel value.
 
     // Tracks the number of hits per player per round.
     mapping(uint256 => mapping(address => uint256)) hitsPerRound;
