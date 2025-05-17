@@ -6,6 +6,7 @@ import "./Config.sol";
 import "./utils/ReentrancyGuard.sol";
 import "./Groth16Core.sol";
 import "./Events.sol";
+import "./Lock.sol";
 
 contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
@@ -18,6 +19,7 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
     /// @notice variables set by the buyer
     bytes32 public hashZ;
+    Lock public lockContract;
 
     /// @notice timestamps
     suint256 private t0;
@@ -26,6 +28,9 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
     /// @notice status of the exchange
     ExchangeStatus private status;
+
+    /// @notice verifier address
+    saddress private verifierAddress;
 
     /// @notice Contract statuses
     enum ExchangeStatus {
@@ -69,7 +74,6 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         }
     }
 
-
     function getT0() external view returns (uint256) {
         return uint256(t0);
     }
@@ -80,6 +84,10 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
     function getT2() external view returns (uint256) {
         return uint256(t2);
+    }
+
+    function getLockContract() external view returns (address) {
+        return address(lockContract);
     }
 
     /// @notice Factory initialize the contract
@@ -96,6 +104,13 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         status = ExchangeStatus.uninitialized;
     }
 
+    /// @notice Set the verifier address
+    function setVerifier(address _verifierAddress) external {
+        require(saddress(msg.sender) == factory || saddress(msg.sender) == seller, "GoatZKCP: only factory or seller can set verifier");
+        require(_verifierAddress != address(0), "GoatZKCP: invalid verifier address");
+        verifierAddress = saddress(_verifierAddress);
+    }
+
     /// @notice Buyer initially start the exchange procedure
     function init(bytes32 _hashZ) payable nonReentrant external {
         require(saddress(msg.sender) == buyer, "GoatZKCP: invalid initializer.");
@@ -104,6 +119,14 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
         // set Hash of Z
         hashZ = _hashZ;
+
+        // Create a new Lock contract with the payment
+        uint lockTime = block.timestamp + LIMIT_TIME_TAU;
+        lockContract = new Lock{value: msg.value}(suint256(lockTime));
+        
+        // Set the judge contract (this contract) in the Lock contract
+        lockContract.setJudge(address(this));
+
         // set initialize timestamp
         t0 = suint256(block.timestamp);
         // update contract state
@@ -113,20 +136,34 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     }
 
     /// @notice Seller handout the proof and other information to verify
-    function verify(bytes calldata proof, bytes32 k) nonReentrant external {
+    function verify(
+        uint[2] calldata _pA,
+        uint[2][2] calldata _pB,
+        uint[2] calldata _pC,
+        uint[2] calldata _pubSignals,
+        bytes32 k
+    ) nonReentrant external {
         require(saddress(msg.sender) == seller, "GoatZKCP: invalid verify invoker.");
         require(status == ExchangeStatus.initialized, "GoatZKCP: invalid contract status.");
+        require(verifierAddress != saddress(0), "GoatZKCP: verifier address not set");
+        
         t1 = suint256(block.timestamp);
         require(uint256(t1) <= uint256(t0) + LIMIT_TIME_TAU, "GoatZKCP: invalid verify because of time expired.");
 
-        sbool success = sbool(Groth16Core.verify());
+        // Verify the proof using Groth16Core
+        bool success = Groth16Core.verifyWithAddress(address(verifierAddress), _pA, _pB, _pC, _pubSignals);
+        
         if(success) {
-            // transfer payment to seller
-            payable(address(seller)).transfer(uint64(price));
+            // Transfer the payment to the seller by using the Lock contract
+            lockContract.withdrawByJudge(address(seller));
+            
+            // Reveal the key k to the buyer through the Lock contract
+            lockContract.revealKey(k);
+
             // update contract state
             status = ExchangeStatus.finished;
 
-            emit ExchangeVerifySuccess(uint256(t1), proof, k);
+            emit ExchangeVerifySuccess(uint256(t1), abi.encode(_pA, _pB, _pC), k);
             return;
         }
 
@@ -137,10 +174,13 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     function refund() nonReentrant external {
         require(saddress(msg.sender) == buyer, "GoatZKCP: invalid refund invoker.");
         require(status == ExchangeStatus.initialized, "GoatZKCP: invalid contract status.");
+
         t2 = suint256(block.timestamp);
         require(uint256(t2) > uint256(t0) + LIMIT_TIME_TAU, "GoatZKCP: invalid refund operation.");
+
         // refund buyer
         payable(address(buyer)).transfer(uint64(price));
+
         // update contract state
         status = ExchangeStatus.expired;
 
