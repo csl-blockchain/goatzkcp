@@ -120,11 +120,8 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
         // Create a new Lock contract with the payment
         uint lockTime = block.timestamp + LIMIT_TIME_TAU;
-        lockContract = new Lock{value: msg.value}(suint256(lockTime));
+        lockContract = new Lock{value: msg.value}(suint256(lockTime), address(seller));
         
-        // Set the judge contract (this contract) in the Lock contract
-        lockContract.setJudge(address(this));
-
         // set initialize timestamp
         t0 = suint256(block.timestamp);
         // update contract state

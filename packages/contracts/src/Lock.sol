@@ -14,14 +14,14 @@ contract Lock {
     event Withdrawal(uint amount, uint when);
     event KeyRevealed(bytes32 key);
 
-    constructor(suint _unlockTime) payable {
+    constructor(suint _unlockTime, address _owner) payable {
         require(
             suint(block.timestamp) < _unlockTime,
             "Unlock time should be in the future"
         );
 
         unlockTime = _unlockTime;
-        owner = saddress(payable(msg.sender));
+        owner = saddress(payable(_owner));
         judge = saddress(msg.sender);
         keyRevealed = sbool(false);
     }
@@ -36,11 +36,6 @@ contract Lock {
     
     function getJudge() external view returns (address) {
         return address(judge);
-    }
-
-    function setJudge(address _judge) external {
-        require(saddress(msg.sender) == owner, "Only owner can set judge");
-        judge = saddress(_judge);
     }
 
     function transferOwnership(address newOwner) external {
@@ -58,18 +53,6 @@ contract Lock {
     function getKey() external view returns (bytes32) {
         require(keyRevealed, "Key not revealed yet");
         return keyK;
-    }
-
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
-
-        require(suint(block.timestamp) >= unlockTime, "You can't withdraw yet");
-        require(saddress(msg.sender) == owner, "You aren't the owner");
-
-        emit Withdrawal(uint(address(this).balance), uint(block.timestamp));
-
-        payable(address(owner)).transfer(address(this).balance);
     }
 
     function withdrawByJudge(address recipient) external {
