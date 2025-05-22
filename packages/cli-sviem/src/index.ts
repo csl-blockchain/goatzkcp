@@ -8,7 +8,7 @@ import {
 } from 'seismic-viem'
 import { http, toBytes, toHex } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-
+import _ from "lodash"
 import { CONTRACT_DIR } from '../lib/constants'
 import {
   displayTransaction,
@@ -39,7 +39,7 @@ async function createExchange(
       timestamp,
       price,
     ])
-  displayTransaction(plaintextTx, abi[2])
+  displayTransaction(plaintextTx, _.find(abi, { name: "createExchange" }))
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -92,7 +92,7 @@ async function init(
       value: price,
     }
   )
-  displayTransaction(plaintextTx, abi[2])
+  displayTransaction(plaintextTx, _.find(abi, { name: "init" }))
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -148,7 +148,7 @@ async function verify(
       gas: 5_000_000n,
     }
   )
-  displayTransaction(plaintextTx, abi[2])
+  displayTransaction(plaintextTx, _.find(abi, { name: "verify" }))
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,

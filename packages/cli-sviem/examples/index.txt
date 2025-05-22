@@ -5,16 +5,17 @@ Creating exchange
 Generating transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-Party1:   0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-Party2:   0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
-Timestamp:   0x682f9e6f
+Seller:   0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+Verifier:   0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+Timestamp:   0x682fa23d
+Price:   0x50
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Encrypting transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-Data:     0xd461b26fe0f4f37049c35acc79753054a92d22a1...
+Data:     0x782b3e0143f6fbfa0eb759787c3a09a32872785e...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0xf059c505737e4846cccd2b151da2f6c90c8406df879e4ebf9a0aecd995ba6978
+✅ Transaction confirmed: 0x43eaf6cc50575efaf12af06076d4345775956c4cf4e100c98dc6b7984c788439
 ✅ Judge address: 0xD634771a2829F65B1b491f3c9181fB27eDBA2975
 ✅ Verifier address: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
 
@@ -30,13 +31,14 @@ Initializing exchange
 Generating transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+_hashZ:   0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Encrypting transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0xc2811b0f267823ad542bfda52cfd5c41c155bf9e...
+Data:     0xeab814321f3b592023a4e406135c5857429f6435...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0x7628cb05715cd1beeca0c94281f1d524b6092bb32ca62b1a7a8eaa0dbfdd410f
+✅ Transaction confirmed: 0xd2ed21a978ae6d24fec9cb3a6e29ae343b38ee2dade833192ff05cfe4847b114
 
 
 Getting judge contract status
@@ -51,13 +53,18 @@ Sending proof to contract
 Generating transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+_pA:   0x3704ee1383665cae109b3de9cc1ba0035a542a2cd6d88251aff58843afc1ff2
+_pB:   0x2db941c503ade2c1bb5d2c215e6ef5dbda0913f01aee4f7edcc2fe0e2b7c3947
+_pC:   0x43926fb95a0289bfec5c7df3d93378503fcff17cb054b3fd30c184f6221edcb
+_pubSignals:   0x2fd17f632b4f6f1a2c43cb63529f5f6419a0da9d712dd9719c7d196d0ddbb913
+K:   0x3060a91b8f21f8082d7257e5932f438a1cbc55b39bf714cd78f26cbda2828a87
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Encrypting transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0x1cfbc7ba37472b1bffdb8da5d894651bea569430...
+Data:     0x512796f2fddcb99f1d51a8f2e3b2823152ab9cfd...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0x2ec0c46e80b8621cfa80c0b215857344209895a002aadc1b8ab947f590188c5b
+✅ Transaction confirmed: 0x0d25532a0c9a426453982fd89458cadcffa7b4813e1d7ef9c0ae1544cb45cf88
 
 
 Getting key
