@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import _ from 'lodash'
 import { join } from 'path'
 import {
   createShieldedPublicClient,
@@ -8,7 +9,7 @@ import {
 } from 'seismic-viem'
 import { http, toBytes, toHex } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-import _ from "lodash"
+
 import { CONTRACT_DIR } from '../lib/constants'
 import {
   displayTransaction,
@@ -39,8 +40,8 @@ async function createExchange(
       timestamp,
       price,
     ])
-  displayTransaction(plaintextTx, _.find(abi, { name: "createExchange" }))
-  displayTransaction(shieldedTx, _.find(abi, { name: "createExchange" }), true)
+  displayTransaction(plaintextTx, _.find(abi, { name: 'createExchange' }))
+  displayTransaction(shieldedTx, _.find(abi, { name: 'createExchange' }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -93,8 +94,8 @@ async function init(
       value: price,
     }
   )
-  displayTransaction(plaintextTx, _.find(abi, { name: "init" }))
-  displayTransaction(shieldedTx, _.find(abi, { name: "init" }), true)
+  displayTransaction(plaintextTx, _.find(abi, { name: 'init' }))
+  displayTransaction(shieldedTx, _.find(abi, { name: 'init' }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -150,8 +151,8 @@ async function verify(
       gas: 5_000_000n,
     }
   )
-  displayTransaction(plaintextTx, _.find(abi, { name: "verify" }))
-  displayTransaction(shieldedTx, _.find(abi, { name: "verify" }), true)
+  displayTransaction(plaintextTx, _.find(abi, { name: 'verify' }))
+  displayTransaction(shieldedTx, _.find(abi, { name: 'verify' }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -186,6 +187,22 @@ async function checkAddresses(
   printSuccess(`Seller being passed: ${chalk.green(sellerAddress)}`)
   printSuccess(`Buyer in judge: ${chalk.green(buyer)}`)
   printSuccess(`Buyer being passed: ${chalk.green(buyerAddress)}`)
+}
+
+/*
+ * Checks the seller and buyer balance
+ */
+async function checkBalance(client: any, sellerAddress: any, buyerAddress: any) {
+  console.log(chalk.blue(`\n\nChecking balance...`))
+  const sellerBalance = await client.getBalance({
+    address: sellerAddress,
+  })
+  const buyerBalance = await client.getBalance({
+    address: buyerAddress,
+  })
+
+  printSuccess(`Seller balance: ${chalk.green(sellerBalance)}`)
+  printSuccess(`Buyer balance: ${chalk.green(buyerBalance)}`)
 }
 
 async function main() {
@@ -269,6 +286,8 @@ async function main() {
     account: privateKeyToAccount(privkeyBuyer),
   })
 
+  await checkBalance(client, sellerWalletClient.account.address, buyerWalletClient.account.address)
+
   const factoryContractByBuyer = getShieldedContract({
     abi: factoryAbi,
     address: factoryAddr,
@@ -283,7 +302,7 @@ async function main() {
     buyerWalletClient.account.address,
     verifierAddr,
     timestamp,
-    80
+    price
   )
 
   const judgeContractByBuyer = getShieldedContract({
@@ -305,6 +324,8 @@ async function main() {
 
   await init(judgeContractByBuyer, buyerWalletClient, judgeAbi, hashZ, price)
 
+  await checkBalance(client, sellerWalletClient.account.address, buyerWalletClient.account.address)
+
   await getJudgeStatus(judgeContractByBuyer)
 
   await getKey(judgeContractByBuyer)
@@ -323,6 +344,8 @@ async function main() {
   await getKey(judgeContractByBuyer)
 
   await getJudgeStatus(judgeContractByBuyer)
+
+  await checkBalance(client, sellerWalletClient.account.address, buyerWalletClient.account.address)
 
   console.log('\n')
   printSuccess('Success!')

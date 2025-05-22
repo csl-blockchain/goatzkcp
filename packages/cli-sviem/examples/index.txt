@@ -4,28 +4,28 @@
 Creating exchange
 Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+To:       0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
 Seller:   0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-Verifier:   0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
-Timestamp:   0x682fa4b0
+Verifier:   0x5fbdb2315678afecb367f032d93f642f64180aa3
+Timestamp:   0x682fa5d8
 Price:   0x50
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-Seller:   0x1c4282f3bbd3b5c5e6493d252a3a5caa72b53592beed351dd1b0cb2069956ecc
-Verifier:   0x448b51cb6e0e7f42f723711a319a5a9cf3d74d3c14fd24dbd96b401c964a8099
-Timestamp:   0x23b371d9fcf1d7b6098b8e6ad0c1db950f0fae233c75bdff64c022757b1dfd02
-Price:   0x7560a811d80debd9dc7a1ff02b9d6d8be9f373ec51ef7b0e46c34bc9d31943d3
+To:       0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+Seller:   0x7656b6a0744ff06a3746e16342428255bea4ba753f7f16d76c9c521aa73cd38
+Verifier:   0x60a826d7c64384f708a7ac703d66cd302dcc91e9865269b9076b012ccc0cb01f
+Timestamp:   0x478a8d34e040c1640262a0c2c86332efe291a0e3f6f51d4dd9e3852319387a67
+Price:   0x1871a6be6513c876949eed3b396fff54c3d0afebc727c6113f65aabd09b275df
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying  shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-Data:     0xf1fc18071c4282f3bbd3b5c5e6493d252a3a5caa72b53592beed351dd1b0cb2069956ecc448b51cb6e0e7f42f723711a319a5a9cf3d74d3c14fd24dbd96b401c964a809923b371d9fcf1d7b6098b8e6ad0c1db950f0fae233c75bdff64c022757b1dfd027560a811d80debd9dc7a1ff02b9d6d8be9f373ec51ef7b0e46c34bc9d31943d335e4e44ade89b1cd889001a499cd0935
+To:       0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+Data:     0xd064a10207656b6a0744ff06a3746e16342428255bea4ba753f7f16d76c9c521aa73cd3860a826d7c64384f708a7ac703d66cd302dcc91e9865269b9076b012ccc0cb01f478a8d34e040c1640262a0c2c86332efe291a0e3f6f51d4dd9e3852319387a671871a6be6513c876949eed3b396fff54c3d0afebc727c6113f65aabd09b275df6f91599da2a91dcffef68942eaa8ab02
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0xd7d39ef782efe59fecf37de335d2256ffcd0fe8aaa91c916f81e678091025854
-✅ Judge address: 0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-✅ Verifier address: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+✅ Transaction confirmed: 0xef265ac572f9f1728b84e4a92969e532c95966a69f322c8cd6c8f769f3d5d5a8
+✅ Judge address: 0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
+✅ Verifier address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 
 
 Validating addresses
@@ -38,20 +38,20 @@ Validating addresses
 Initializing exchange
 Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
 _hashZ:   0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-_hashZ:   0x6ec23bead61a7a994349a91b4d1b50dc6345082b40e191c25cf6716ec3ea1349
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
+_hashZ:   0x1c95d38388f0284c5a0c9afb709757664f283ede556f49cf76026b29d0c35118
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying  shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0xd91c5f606ec23bead61a7a994349a91b4d1b50dc6345082b40e191c25cf6716ec3ea1349a137dceb3a149e53f2040d3dd184bd53
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
+Data:     0x21574e0c1c95d38388f0284c5a0c9afb709757664f283ede556f49cf76026b29d0c35118abf6e8992b11065fde290b3f6e72c948
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0xc6148aeeaf9e08ec77c9630651fcd2b44f577c7f47eb3aba149ace82b39a8fb1
+✅ Transaction confirmed: 0xb961d14ff26b0af64ed6a72b315e6da318cee3e1f8674de2ad1f5c60003aaba9
 
 
 Getting judge contract status
@@ -65,7 +65,7 @@ Getting key
 Sending proof to contract
 Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
 _pA:   0x3704ee1383665cae109b3de9cc1ba0035a542a2cd6d88251aff58843afc1ff2
 _pB:   0x2db941c503ade2c1bb5d2c215e6ef5dbda0913f01aee4f7edcc2fe0e2b7c3947
 _pC:   0x43926fb95a0289bfec5c7df3d93378503fcff17cb054b3fd30c184f6221edcb
@@ -74,19 +74,19 @@ K:   0x3060a91b8f21f8082d7257e5932f438a1cbc55b39bf714cd78f26cbda2828a87
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-_pA:   0x81d61b1ff8f572465d770368e6fa3bf9d7ca16a5ec027390e688b9bf93b3e126
-_pB:   0xe9f212cd5c50583b14a67422821000abd9f2bfe343eebcd0295218221b83aff5
-_pC:   0xc03b5ac68ea11ce64a5f9fbfe7c9e556553ea305b530eb95423dfbcf35e8b20b
-_pubSignals:   0xf72f41e2f497577b2cffff81e6e3b0a7302955a356b638f3708dccdbb1d57a41
-K:   0xe1951d87ba717dd33c94b7e87d44542d729039caf51bc683643d243c474feb6c
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
+_pA:   0x2d304b2545418fc81c6d54dc63c6daaedf1ecb4f16164c1b314de41bda452b17
+_pB:   0x8ee9460ce449b1bd2074b08c0f9ada074050b8704749143483516b56ba1b505b
+_pC:   0xaad14ad5a78592792ee46d8ed415391e331b2be5f465a9fdfeccf4afbbc4c198
+_pubSignals:   0x49f2c2d55e2d6ca065bef780a365a413bf772b7656773c4b7bd574b33d8031a7
+K:   0x2b15e90a3ad9f7b945ffb6ca9c143a01754b8cf58330138652c7e08902f56f1a
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Displaying  shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0xd618a05681d61b1ff8f572465d770368e6fa3bf9d7ca16a5ec027390e688b9bf93b3e126e9f212cd5c50583b14a67422821000abd9f2bfe343eebcd0295218221b83aff5c03b5ac68ea11ce64a5f9fbfe7c9e556553ea305b530eb95423dfbcf35e8b20bf72f41e2f497577b2cffff81e6e3b0a7302955a356b638f3708dccdbb1d57a41e1951d87ba717dd33c94b7e87d44542d729039caf51bc683643d243c474feb6c483ccfb2628fbd5fef8940c80a666c5035837c17e12113385166942d41ec0e95d267a9e2b2a98cff46d96d1fa28b54d8f9a99deb0f0607a9e9354ab0f0f4713e5a3116eebcdf159d1ea178621c4702f4cdd0db117016dbc3729ac71b38068c85e0cf4820f0a946ad61c522915dfe93ee5fa9dd6cbc3c2b6a87be7e7a25a304f0a1a24b0fbb2c1420859dd9def548b9cb66d390eafaaae71ff825e68e0e985e5b0e5b4d355981bc4886406977ca0dec3222317dee1876d0d7e19a2eb0498aef020a8e92f5084a51fd3fc3ada8ae9e12fe
+To:       0x8DD3b332eC9Dfe5d0DD8e78BFE1d2fA8ecdc3B5b
+Data:     0xce766e8a2d304b2545418fc81c6d54dc63c6daaedf1ecb4f16164c1b314de41bda452b178ee9460ce449b1bd2074b08c0f9ada074050b8704749143483516b56ba1b505baad14ad5a78592792ee46d8ed415391e331b2be5f465a9fdfeccf4afbbc4c19849f2c2d55e2d6ca065bef780a365a413bf772b7656773c4b7bd574b33d8031a72b15e90a3ad9f7b945ffb6ca9c143a01754b8cf58330138652c7e08902f56f1a7838cb1915c1a826219bc59873e9e9cdd9cf7ce06515cabff9b6e2b93c2f754080ca3b8fe9f8af6e0b9e2621b44538fb79bde53c9c58428a87fdcda13212602a19dfb486e4653b6d71d71829dda86a0961a93c2d83023bf7edd8ed63c3f77081fd6399defb4c258d13a88dc671051d672b250fdee537d77d1a2a2a4ca0e0c32296b16b9044e049f76e1de79ad8dd48e44d148dcac8cc88fc1d87a17c91dcc0968a424f97eb293e91a6ce0922b7ca7f5be165e084365f2feca054c0ba56bc3dba0a2a5f2b7a13e0fba103af9c7ed7e593
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0xe9b175486110445d964d3c9389081363cb9fd371d982dd30a0ff68b4d0ce5729
+✅ Transaction confirmed: 0x476cf557e87bc70e61a5ebdc52197e2efb5d917e5c22de054f2a355e6f9feced
 
 
 Getting key
