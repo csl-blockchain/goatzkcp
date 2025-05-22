@@ -1,0 +1,73 @@
+❯ bun run src/mempool-monitor.ts
+Connecting to Seismic node at http://127.0.0.1:8545
+Mempool Monitor Started - Polling every 0.5 seconds
+Current block number: 6
+....
+[2025-05-22T22:00:15.615Z] New Pending Transaction:
+From: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+Nonce: 0
+To: 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+Value: 0x0 wei
+Gas Price: 0x68610d26
+Gas: 0x183852
+Type: 0x4A
+Data: 0xd461b26fe0f4f37049c35acc79753054a92d22a109fa7eb26bae65d1e300be8686cc27e763bf0de515e7d65dd03cfc947c1bf460c3319d940f65726506b61092bba281517d344b2ea331f68496b6c1f90471685ff7c193278363d514c537917f56b3661ad3e4a43f00eb05503d0d24e4b4537db17a957d479fdc29713e87c0c7616149ada675e6ac9b3a46a31d4a28fb48940a7d
+.
+[2025-05-22T22:00:16.119Z] New block: 7
+Transactions in block: 1
+
+Transaction: 0xf059c505737e4846cccd2b151da2f6c90c8406df879e4ebf9a0aecd995ba6978
+From: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+To: 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+Value: 0 wei
+Gas Price: 1751190822
+Gas: 1587282
+Type: Legacy
+Transaction confirmed and removed from mempool
+......
+[2025-05-22T22:00:19.623Z] New Pending Transaction:
+From: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+Nonce: 1
+To: 0xd634771a2829f65b1b491f3c9181fb27edba2975
+Value: 0x50 wei
+Gas Price: 0x64b4fcab
+Gas: 0x81184
+Type: 0x4A
+Data: 0xc2811b0f267823ad542bfda52cfd5c41c155bf9ef40962ee604ae6b66b7c1267cf02ee63472cc7de38a8f2d4a02535362efbd46d
+...
+[2025-05-22T22:00:21.149Z] New block: 8
+Transactions in block: 1
+
+Transaction: 0x7628cb05715cd1beeca0c94281f1d524b6092bb32ca62b1a7a8eaa0dbfdd410f
+From: 0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+To: 0xd634771a2829f65b1b491f3c9181fb27edba2975
+Value: 80 wei
+Gas Price: 1689582763
+Gas: 528772
+Type: Legacy
+Transaction confirmed and removed from mempool
+....
+[2025-05-22T22:00:23.642Z] New Pending Transaction:
+From: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+Nonce: 3
+To: 0xd634771a2829f65b1b491f3c9181fb27edba2975
+Value: 0x0 wei
+Gas Price: 0x612fca36
+Gas: 0x4c4b40
+Type: 0x4A
+Data: 0x1cfbc7ba37472b1bffdb8da5d894651bea569430b93f8dfe6bb9fb520f76180a18d4438922a1dd9ccf6e585388578e7d160d9cd87809369a5fd0041c4027f5661792412cc1a92d14967bd60c0f2b8f0e870c1f48493a62b83f1be52034cf640a4564cab74ef534dca4ecd049e843a51aa8cdef5d9151e2c6bf96e0ee4820208d9d81459e4e5075b623db6b3abf831fab18f14dce9fe83531a0c4f9735d7e315f4f2f20b7ba94062d733c610a324999cd5b79ac211ac66bc1590bf4871123939721c0060263d4eae6edf3fb66a9407ab789cb8c02b587a3e3c89687eaed70135bcf547691df416915af0138c128da47fbc852f2df795c55f52b9acaea724d385a88beb21c26291d827d3aa793fde07c567a55870bb2ed6b423d52dee40c5b9fa528418671d3eb426f94e16b91cd54a12b8ae2b2ce2ef82c75fca3479f9552d6803c8ee7df52b25e4c4ef1d5f94d9c3f88785b3545379e2de635879ad8f960d3edd6e733b03d460fd199f4146051f2e6636d30afdd
+.....
+[2025-05-22T22:00:26.170Z] New block: 9
+Transactions in block: 1
+
+Transaction: 0x2ec0c46e80b8621cfa80c0b215857344209895a002aadc1b8ab947f590188c5b
+From: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+To: 0xd634771a2829f65b1b491f3c9181fb27edba2975
+Value: 0 wei
+Gas Price: 1630521910
+Gas: 5000000
+Type: Legacy
+Transaction confirmed and removed from mempool
+..........
+[2025-05-22T22:00:31.196Z] New block: 10
+Transactions in block: 0

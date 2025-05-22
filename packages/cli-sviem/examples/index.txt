@@ -1,0 +1,71 @@
+❯ bun run src/index.ts
+
+
+Creating exchange
+Generating transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+Party1:   0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+Party2:   0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+Timestamp:   0x682f9e6f
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Encrypting transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+Data:     0xd461b26fe0f4f37049c35acc79753054a92d22a1...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0xf059c505737e4846cccd2b151da2f6c90c8406df879e4ebf9a0aecd995ba6978
+✅ Judge address: 0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+✅ Verifier address: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+
+
+Validating addresses
+✅ Seller in judge: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+✅ Seller being passed: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+✅ Buyer in judge: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+✅ Buyer being passed: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+
+
+Initializing exchange
+Generating transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Encrypting transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+Data:     0xc2811b0f267823ad542bfda52cfd5c41c155bf9e...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0x7628cb05715cd1beeca0c94281f1d524b6092bb32ca62b1a7a8eaa0dbfdd410f
+
+
+Getting judge contract status
+✅ Judge status: initialized
+
+
+Getting key
+✅ Key: ???
+
+
+Sending proof to contract
+Generating transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Encrypting transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+Data:     0x1cfbc7ba37472b1bffdb8da5d894651bea569430...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0x2ec0c46e80b8621cfa80c0b215857344209895a002aadc1b8ab947f590188c5b
+
+
+Getting key
+✅ Key: 0x0000000000000000000000000000000000000000000000000000000000000001
+
+
+Getting judge contract status
+✅ Judge status: finished
+
+
+✅ Success!
