@@ -1,0 +1,37 @@
+Step 4: Incrementing counter by 3
+Generating transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0x797A2B595aeC5e593A2e5ff787Cb9AB1D5456329
+Amount:   0x3
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Encrypting transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0x797A2B595aeC5e593A2e5ff787Cb9AB1D5456329
+Data:     0x9b321a42488bc6ef92c1e36aef01d76676b1959b...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: https://explorer-2.seismicdev.net/tx/0xcab021f4e7485be15a936037777cff8be7f429e85cfd81518119fb5b90819d5f
+
+
+Step 5: Attempting to read counter
+✅ Value: ???
+
+
+Step 6: Incrementing counter by 2
+Generating transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0x797A2B595aeC5e593A2e5ff787Cb9AB1D5456329
+Amount:   0x2
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Encrypting transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0x797A2B595aeC5e593A2e5ff787Cb9AB1D5456329
+Data:     0xc54aa720455b05055895bf839cc8cd7f7cb2a16e...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: https://explorer-2.seismicdev.net/tx/0xbbeb035fa889c263bf59982a9d3464fc6296dd7685fb989c695760128d25ce6f
+
+
+Step 7: Attempting to read counter
+✅ Value: 5
+
+
+✅ Success. You just interacted with your first Seismic contract!
