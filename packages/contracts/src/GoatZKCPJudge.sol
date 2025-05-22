@@ -16,6 +16,7 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     saddress private seller; // seller
     saddress private buyer; // buyer
     suint256 private price; // price
+    saddress private verifier;
 
     /// @notice variables set by the buyer
     bytes32 public hashZ;
@@ -28,9 +29,6 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
 
     /// @notice status of the exchange
     ExchangeStatus private status;
-
-    /// @notice verifier address
-    saddress private verifierAddress;
 
     /// @notice Contract statuses
     enum ExchangeStatus {
@@ -96,26 +94,19 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     }
 
     /// @notice Factory initialize the contract
-    function initialize(address _seller, address _buyer, uint256 _price) external {
+    function initialize(saddress _seller, saddress _buyer, saddress _verifier, suint256 _price) external {
         require(saddress(msg.sender) == factory, 'GoatZKCP: only GoatZKCPFactory can initialize the contract');
-        require(_seller != address(0), "GoatZKCP: invalid address.");
-        require(_buyer != address(0), "GoatZKCP: invalid address.");
+        require(_seller != saddress(0), "GoatZKCP: invalid seller address.");
+        require(_buyer != saddress(0), "GoatZKCP: invalid buyer address.");
+        require(_verifier != saddress(0), "GoatZKCP: invalid verifier address.");
         factory = saddress(msg.sender);
-        buyer = saddress(_buyer);
-        seller = saddress(_seller);
-        price = suint256(_price);
+        buyer = _buyer;
+        seller = _seller;
+        verifier = _verifier;
+        price = _price;
 
         // initialize contract status
         status = ExchangeStatus.uninitialized;
-    }
-
-    /// @notice Set the verifier address
-    function setVerifier(address _verifierAddress) external {
-        require(saddress(msg.sender) == factory || saddress(msg.sender) == seller, "GoatZKCP: only factory or seller can set verifier");
-        require(_verifierAddress != address(0), "GoatZKCP: invalid verifier address");
-        verifierAddress = saddress(_verifierAddress);
-
-        emit ExchangeSetVerifier(_verifierAddress);
     }
 
     /// @notice Buyer initially start the exchange procedure
@@ -152,13 +143,13 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
     ) nonReentrant external {
         require(saddress(msg.sender) == seller, "GoatZKCP: invalid verify invoker.");
         require(status == ExchangeStatus.initialized, "GoatZKCP: invalid contract status.");
-        require(verifierAddress != saddress(0), "GoatZKCP: verifier address not set");
+        require(verifier != saddress(0), "GoatZKCP: verifier address not set");
         
         t1 = suint256(block.timestamp);
         require(uint256(t1) <= uint256(t0) + LIMIT_TIME_TAU, "GoatZKCP: invalid verify because of time expired.");
 
         // Verify the proof using Groth16Core
-        bool success = Groth16Core.verifyWithAddress(address(verifierAddress), _pA, _pB, _pC, _pubSignals);
+        bool success = Groth16Core.verifyWithAddress(address(verifier), _pA, _pB, _pC, _pubSignals);
         
         if(success) {
             // Transfer the payment to the seller by using the Lock contract
@@ -194,9 +185,4 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         emit ExchangeRefund(uint256(t2));
     }
 
-    /// Return unshielded price callable only by seller or buyer
-    function checkPrice() external view returns (uint64) {
-        require(saddress(msg.sender) == buyer || saddress(msg.sender) == seller, 'GoatZKCP: only the buyer or the seller can check the price.');
-        return uint64(price);
-    }
 }

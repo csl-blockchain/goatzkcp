@@ -23,16 +23,16 @@ if ! source ./common/print.sh; then
     exit 1
 fi
 
-# Define contract paths - check if they exist first
-CONTRACTS_DIR="../src"
+# Define contract paths - use absolute paths
+CURRENT_DIR=$(pwd)
+PARENT_DIR=$(dirname "$CURRENT_DIR")
+CONTRACTS_DIR="$PARENT_DIR/src"
+
 if [ ! -d "$CONTRACTS_DIR" ]; then
-    CONTRACTS_DIR="./src"
-    if [ ! -d "$CONTRACTS_DIR" ]; then
-        echo "Error: Could not find contracts directory (src)"
-        echo "Current directory: $(pwd)"
-        echo "Parent directory contents: $(ls -la ..)"
-        exit 1
-    fi
+    echo "Error: Could not find contracts directory at $CONTRACTS_DIR"
+    echo "Current directory: $(pwd)"
+    echo "Parent directory contents: $(ls -la ..)"
+    exit 1
 fi
 
 echo "Using contracts directory: $CONTRACTS_DIR"
@@ -222,7 +222,7 @@ if [ -z "$factory_address" ]; then
         --rpc-url "$RPC_URL" \
         --private-key "$privkey" \
         --broadcast \
-        --libraries "src/Groth16Core.sol:Groth16Core:$library_address" \
+        --libraries "$CONTRACTS_DIR/Groth16Core.sol:Groth16Core:$library_address" \
         "$FACTORY_CONTRACT_PATH")
     print_success "Factory deployed successfully."
 
@@ -236,25 +236,13 @@ if [ -z "$factory_address" ]; then
     echo -e "Factory Transaction: ${GREEN}$factory_tx${NC}"
     echo -e "Factory Link: ${GREEN}$EXPLORER_URL/address/$factory_address${NC}"
     
-    # Set the verifier address in the factory
-    print_step "4" "Setting verifier address in factory"
-    echo "Setting verifier address in factory..."
-    set_verifier_output=$(sforge script \
-        --rpc-url "$RPC_URL" \
-        --private-key "$privkey" \
-        --broadcast \
-        --libraries "src/Groth16Core.sol:Groth16Core:$library_address" \
-        --sig "setDefaultVerifier(address)" \
-        "$factory_address" \
-        "$verifier_address")
-    print_success "Verifier address set in factory."
 else
     echo -e "${GREEN}Using existing GoatZKCPFactory at $factory_address${NC}"
     # Get transaction hash from file if it exists
     factory_tx=$(grep "^GoatZKCPFactory_tx: " "$DEPLOY_FILE" | cut -d' ' -f2 || echo "N/A")
     
     echo -e "${BLUE}Note: If you need to set the verifier address in the factory, run:${NC}"
-    echo -e "sforge script --rpc-url \"$RPC_URL\" --private-key \"$privkey\" --broadcast --libraries \"src/Groth16Core.sol:Groth16Core:$library_address\" --sig \"setDefaultVerifier(address)\" \"$factory_address\" \"$verifier_address\""
+    echo -e "sforge script --rpc-url \"$RPC_URL\" --private-key \"$privkey\" --broadcast --libraries \"$CONTRACTS_DIR/Groth16Core.sol:Groth16Core:$library_address\" --sig \"setDefaultVerifier(address)\" \"$factory_address\" \"$verifier_address\""
 fi
 
 echo "Creating JSON output file"

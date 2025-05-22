@@ -10,29 +10,23 @@ contract GoatZKCPFactory is Ownable {
 
     event ExchangeCreate(address indexed judge, address indexed seller, address indexed buyer, uint256 price, uint256 timestamp);
 
-    mapping(address => mapping(address => mapping(suint256 => address))) private getJudgesMap;
-    address[] judges;
+    mapping(saddress => mapping(saddress => mapping(suint256 => saddress))) private getJudgesMap;
+    saddress[] judges;
+
+    mapping(saddress => mapping(saddress => mapping(suint256 => saddress))) private getVerifiersMap;
+    saddress[] verifiers;
     
-    // Default verifier address that will be used for all exchanges
-    saddress private defaultVerifier;
-
-    /// @notice Set the default verifier address
-    function setDefaultVerifier(address _verifierAddress) external onlyOwner {
-        require(_verifierAddress != address(0), "GoatZKCP: invalid verifier address");
-        defaultVerifier = saddress(_verifierAddress);
-    }
-
     /// @notice Getter function for judges mapping
-    function getJudges(address party1, address party2, uint256 timestamp) external view returns (address) {
-        return getJudgesMap[party1][party2][suint256(timestamp)];
+    function getJudges(saddress party1, saddress party2, suint256 timestamp) external view returns (address) {
+        return address(getJudgesMap[party1][party2][suint256(timestamp)]);
     }
 
     /// @notice We recommend buyer to create the exchange
-    function createExchange(address seller, uint256 price) external returns (address judge) {
-        require(seller != address(0), 'GoatZKCP: seller is zero address');
+    function createExchange(address seller, address verifier, suint256 timestamp, suint256 price) external returns (address judge) {
+        require(seller != address(0), 'GoatZKCP: seller address is invalid');
+        require(verifier != address(0), 'GoatZKCP: verifier address is invalid');
         
         address buyer = msg.sender; // msg.sender is the buyer
-        suint256 timestamp = suint256(block.timestamp);
         bytes memory bytecode = abi.encodePacked(
             type(GoatZKCPJudge).creationCode,
             abi.encode(price)
@@ -41,47 +35,31 @@ contract GoatZKCPFactory is Ownable {
         assembly {
             judge := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
-        IGoatZKCPJudge(judge).initialize(seller, buyer, price);
+        IGoatZKCPJudge(judge).initialize(saddress(seller), saddress(buyer), saddress(verifier), price);
         
-        // Set the verifier address if a default one is available
-        if (defaultVerifier != saddress(0)) {
-            GoatZKCPJudge(judge).setVerifier(address(defaultVerifier));
-        }
+        getJudgesMap[saddress(seller)][saddress(buyer)][timestamp] = saddress(judge);
+        getJudgesMap[saddress(buyer)][saddress(seller)][timestamp] = saddress(judge);
+        judges.push(saddress(judge));
+
+        getVerifiersMap[saddress(seller)][saddress(buyer)][timestamp] = saddress(verifier);
+        getVerifiersMap[saddress(buyer)][saddress(seller)][timestamp] = saddress(verifier);
+        verifiers.push(saddress(verifier));
         
-        getJudgesMap[seller][buyer][timestamp] = judge;
-        getJudgesMap[buyer][seller][timestamp] = judge;
-        judges.push(judge);
-        
-        emit ExchangeCreate(judge, seller, buyer, price, uint256(timestamp));
+        emit ExchangeCreate(judge, address(seller), buyer, uint256(price), uint256(timestamp));
+
+        return judge;
     }
 
-    /// @notice Create exchange with a specific verifier
-    function createExchangeWithVerifier(address seller, uint256 price, address verifierAddress) external returns (address judge) {
-        require(seller != address(0), 'GoatZKCP: seller is zero address');
-        require(verifierAddress != address(0), 'GoatZKCP: verifier is zero address');
-        
-        address buyer = msg.sender; // msg.sender is the buyer
-        suint256 timestamp = suint256(block.timestamp);
-        bytes memory bytecode = abi.encodePacked(
-            type(GoatZKCPJudge).creationCode,
-            abi.encode(price)
-            );
-        bytes32 salt = keccak256(abi.encodePacked(seller, buyer, price, verifierAddress));
-        assembly {
-            judge := create2(0, add(bytecode, 32), mload(bytecode), salt)
-        }
-        IGoatZKCPJudge(judge).initialize(seller, buyer, price);
-        GoatZKCPJudge(judge).setVerifier(verifierAddress);
-        
-        getJudgesMap[seller][buyer][timestamp] = judge;
-        getJudgesMap[buyer][seller][timestamp] = judge;
-        judges.push(judge);
-        
-        emit ExchangeCreate(judge, seller, buyer, price, uint256(timestamp));
+    function getJudge(address seller, address buyer, suint256 timestamp) external view returns (address) {
+        return address(getJudgesMap[saddress(seller)][saddress(buyer)][timestamp]);
+    }
+
+    function getVerifier(address seller, address buyer, suint256 timestamp) external view returns (address) {
+        return address(getVerifiersMap[saddress(seller)][saddress(buyer)][timestamp]);
     }
 
     function judgesLength() external view returns (uint) {
-        return judges.length;
+        return uint(judges.length);
     }
 
 }

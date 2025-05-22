@@ -5,9 +5,7 @@ pragma solidity ^0.8.0;
 /// @author
 interface IGoatZKCPJudge {
 
-    function initialize(address _seller, address _buyer, uint256 _price) external;
-
-    function setVerifier(address _verifierAddress) external;
+    function initialize(saddress _seller, saddress _buyer, saddress _verifier, suint256 _price) external;
 
     function init(bytes32 _hashZ) payable external;
 
@@ -20,8 +18,4 @@ interface IGoatZKCPJudge {
     ) external;
 
     function refund() external;
-
-    function checkPrice() external view returns (uint64);
-
-    function getLockContract() external view returns (address);
 }
