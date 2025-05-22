@@ -3,7 +3,9 @@
   "license": "MIT License",
   "type": "module",
   "scripts": {
-    "dev": "bun run src/index.ts"
+    "dev": "bun run src/index.ts",
+    "monitor": "bun run src/mempool-monitor.ts",
+    "test:front-running": "bun run src/front-running-test.ts"
   },
   "dependencies": {
     "chalk": "^5.4.1",

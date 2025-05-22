@@ -6,6 +6,7 @@ import { http } from 'viem'
  * Monitors the mempool and blockchain for transactions
  */
 async function monitorMempool() {
+  const truncated = false
   const rpcUrl = process.env.RPC_URL || 'http://127.0.0.1:8545'
   const pollingInterval = 500 // 500 milliseconds - check more frequently
   
@@ -68,7 +69,7 @@ async function monitorMempool() {
               }
               
               // Display a truncated version of the data
-              if (transaction.input && transaction.input.length > 10) {
+              if (transaction.input && truncated && transaction.input.length > 10) {
                 console.log(`Data: ${transaction.input.substring(0, 66)}...`)
               } else {
                 console.log(`Data: ${transaction.input}`)
