@@ -63,10 +63,10 @@ function displayTransaction(
   isEncrypted: boolean = false
 ) {
   const parsedData = abiFunc ? parseCalldata(tx.data, abiFunc) : null
-  const actionDescription = isEncrypted ? 'Encrypting' : 'Generating'
-  const dataColor = isEncrypted ? chalk.green : chalk.red
+  const actionDescription = isEncrypted ? 'shielded' : 'un-shielded'
+  const dataColor = (isEncrypted && !abiFunc) ? chalk.green : chalk.red
 
-  console.log(`${actionDescription} transaction...`)
+  console.log(`Displaying ${abiFunc ? "parsed ": " "}${actionDescription} transaction...`)
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
   console.log(`To:       ${tx.to}`)
   if (parsedData) {
@@ -75,7 +75,7 @@ function displayTransaction(
       console.log(`${formattedKey}:   ${dataColor(value)}`)
     })
   } else {
-    console.log(`Data:     ${dataColor(tx.data.slice(0, 42) + '...')}`)
+    console.log(`Data:     ${dataColor(tx.data)}`)
   }
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
 }

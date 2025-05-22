@@ -40,6 +40,7 @@ async function createExchange(
       price,
     ])
   displayTransaction(plaintextTx, _.find(abi, { name: "createExchange" }))
+  displayTransaction(shieldedTx, _.find(abi, { name: "createExchange" }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -93,6 +94,7 @@ async function init(
     }
   )
   displayTransaction(plaintextTx, _.find(abi, { name: "init" }))
+  displayTransaction(shieldedTx, _.find(abi, { name: "init" }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
@@ -149,6 +151,7 @@ async function verify(
     }
   )
   displayTransaction(plaintextTx, _.find(abi, { name: "verify" }))
+  displayTransaction(shieldedTx, _.find(abi, { name: "verify" }), true)
   displayTransaction(shieldedTx, undefined, true)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,

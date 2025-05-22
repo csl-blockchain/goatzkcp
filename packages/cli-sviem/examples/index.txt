@@ -2,20 +2,28 @@
 
 
 Creating exchange
-Generating transaction...
+Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 Seller:   0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
 Verifier:   0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
-Timestamp:   0x682fa23d
+Timestamp:   0x682fa4b0
 Price:   0x50
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Encrypting transaction...
+Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-Data:     0x782b3e0143f6fbfa0eb759787c3a09a32872785e...
+Seller:   0x1c4282f3bbd3b5c5e6493d252a3a5caa72b53592beed351dd1b0cb2069956ecc
+Verifier:   0x448b51cb6e0e7f42f723711a319a5a9cf3d74d3c14fd24dbd96b401c964a8099
+Timestamp:   0x23b371d9fcf1d7b6098b8e6ad0c1db950f0fae233c75bdff64c022757b1dfd02
+Price:   0x7560a811d80debd9dc7a1ff02b9d6d8be9f373ec51ef7b0e46c34bc9d31943d3
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0x43eaf6cc50575efaf12af06076d4345775956c4cf4e100c98dc6b7984c788439
+Displaying  shielded transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+Data:     0xf1fc18071c4282f3bbd3b5c5e6493d252a3a5caa72b53592beed351dd1b0cb2069956ecc448b51cb6e0e7f42f723711a319a5a9cf3d74d3c14fd24dbd96b401c964a809923b371d9fcf1d7b6098b8e6ad0c1db950f0fae233c75bdff64c022757b1dfd027560a811d80debd9dc7a1ff02b9d6d8be9f373ec51ef7b0e46c34bc9d31943d335e4e44ade89b1cd889001a499cd0935
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0xd7d39ef782efe59fecf37de335d2256ffcd0fe8aaa91c916f81e678091025854
 ✅ Judge address: 0xD634771a2829F65B1b491f3c9181fB27eDBA2975
 ✅ Verifier address: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
 
@@ -28,17 +36,22 @@ Validating addresses
 
 
 Initializing exchange
-Generating transaction...
+Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
 _hashZ:   0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Encrypting transaction...
+Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0xeab814321f3b592023a4e406135c5857429f6435...
+_hashZ:   0x6ec23bead61a7a994349a91b4d1b50dc6345082b40e191c25cf6716ec3ea1349
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0xd2ed21a978ae6d24fec9cb3a6e29ae343b38ee2dade833192ff05cfe4847b114
+Displaying  shielded transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+Data:     0xd91c5f606ec23bead61a7a994349a91b4d1b50dc6345082b40e191c25cf6716ec3ea1349a137dceb3a149e53f2040d3dd184bd53
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0xc6148aeeaf9e08ec77c9630651fcd2b44f577c7f47eb3aba149ace82b39a8fb1
 
 
 Getting judge contract status
@@ -50,7 +63,7 @@ Getting key
 
 
 Sending proof to contract
-Generating transaction...
+Displaying parsed un-shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
 _pA:   0x3704ee1383665cae109b3de9cc1ba0035a542a2cd6d88251aff58843afc1ff2
@@ -59,12 +72,21 @@ _pC:   0x43926fb95a0289bfec5c7df3d93378503fcff17cb054b3fd30c184f6221edcb
 _pubSignals:   0x2fd17f632b4f6f1a2c43cb63529f5f6419a0da9d712dd9719c7d196d0ddbb913
 K:   0x3060a91b8f21f8082d7257e5932f438a1cbc55b39bf714cd78f26cbda2828a87
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Encrypting transaction...
+Displaying parsed shielded transaction...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
-Data:     0x512796f2fddcb99f1d51a8f2e3b2823152ab9cfd...
+_pA:   0x81d61b1ff8f572465d770368e6fa3bf9d7ca16a5ec027390e688b9bf93b3e126
+_pB:   0xe9f212cd5c50583b14a67422821000abd9f2bfe343eebcd0295218221b83aff5
+_pC:   0xc03b5ac68ea11ce64a5f9fbfe7c9e556553ea305b530eb95423dfbcf35e8b20b
+_pubSignals:   0xf72f41e2f497577b2cffff81e6e3b0a7302955a356b638f3708dccdbb1d57a41
+K:   0xe1951d87ba717dd33c94b7e87d44542d729039caf51bc683643d243c474feb6c
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Transaction confirmed: 0x0d25532a0c9a426453982fd89458cadcffa7b4813e1d7ef9c0ae1544cb45cf88
+Displaying  shielded transaction...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+To:       0xD634771a2829F65B1b491f3c9181fB27eDBA2975
+Data:     0xd618a05681d61b1ff8f572465d770368e6fa3bf9d7ca16a5ec027390e688b9bf93b3e126e9f212cd5c50583b14a67422821000abd9f2bfe343eebcd0295218221b83aff5c03b5ac68ea11ce64a5f9fbfe7c9e556553ea305b530eb95423dfbcf35e8b20bf72f41e2f497577b2cffff81e6e3b0a7302955a356b638f3708dccdbb1d57a41e1951d87ba717dd33c94b7e87d44542d729039caf51bc683643d243c474feb6c483ccfb2628fbd5fef8940c80a666c5035837c17e12113385166942d41ec0e95d267a9e2b2a98cff46d96d1fa28b54d8f9a99deb0f0607a9e9354ab0f0f4713e5a3116eebcdf159d1ea178621c4702f4cdd0db117016dbc3729ac71b38068c85e0cf4820f0a946ad61c522915dfe93ee5fa9dd6cbc3c2b6a87be7e7a25a304f0a1a24b0fbb2c1420859dd9def548b9cb66d390eafaaae71ff825e68e0e985e5b0e5b4d355981bc4886406977ca0dec3222317dee1876d0d7e19a2eb0498aef020a8e92f5084a51fd3fc3ada8ae9e12fe
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Transaction confirmed: 0xe9b175486110445d964d3c9389081363cb9fd371d982dd30a0ff68b4d0ce5729
 
 
 Getting key
