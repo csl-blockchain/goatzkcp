@@ -7,6 +7,8 @@ abstract contract Events {
 
     event ExchangeInit(uint256 t0, bytes32 hashZ);
 
+    event ExchangeSetVerifier(address addr);
+
     event ExchangeVerifySuccess(uint256 t1, bytes proof, bytes32 k);
 
     event ExchangeVerifyFail(uint256 t1);

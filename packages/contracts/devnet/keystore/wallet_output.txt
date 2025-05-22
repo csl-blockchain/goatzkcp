@@ -1,0 +1,5 @@
+Address: 0x98126a061AcaABED6d78c5be71bCF1F221A13684
+Private Key: 0x7c34b5275230d4d5f5d6f6853c950990fa6e0f0cc51f54c1b71b8396439997d3
+TXID: 0x09a220f2e02fee72f8206ebeae9def659959111d61513c172735d6414259a009
+
+cast wallet decrypt-keystore /Users/daffafaizan/Documents/University/TA/seismic-starter-latest/packages/contracts/devnet/keystore/b6a6ec33-469b-4420-9c53-34b251b7baa5

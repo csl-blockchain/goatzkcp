@@ -90,6 +90,11 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         return address(lockContract);
     }
 
+    function getKey() external view returns (bytes32) {
+        require(saddress(msg.sender) == buyer, "GoatZKCP: only buyer is allowed to get the key.");
+        return lockContract.getKey();
+    }
+
     /// @notice Factory initialize the contract
     function initialize(address _seller, address _buyer, uint256 _price) external {
         require(saddress(msg.sender) == factory, 'GoatZKCP: only GoatZKCPFactory can initialize the contract');
@@ -109,6 +114,8 @@ contract GoatZKCPJudge is IGoatZKCPJudge, ReentrancyGuard, Config, Events {
         require(saddress(msg.sender) == factory || saddress(msg.sender) == seller, "GoatZKCP: only factory or seller can set verifier");
         require(_verifierAddress != address(0), "GoatZKCP: invalid verifier address");
         verifierAddress = saddress(_verifierAddress);
+
+        emit ExchangeSetVerifier(_verifierAddress);
     }
 
     /// @notice Buyer initially start the exchange procedure
