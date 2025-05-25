@@ -8,9 +8,10 @@ import {
   CHAIN_ID,
   CONTRACT_DIR,
   FACTORY_CONTRACT_NAME,
+  GAS_LIMIT,
   JUDGE_CONTRACT_NAME,
   LOCK_CONTRACT_NAME,
-  WEBSOCKET_URL,
+  RPC_URL,
 } from './constants'
 
 dotenv.config()
@@ -26,11 +27,15 @@ let lockABI
 // Initialize function to set up provider and contracts
 async function initialize() {
   console.log('Server is initializing...')
-  console.log(`Connecting to network at ${WEBSOCKET_URL}...`)
+  console.log(`Connecting to network at ${RPC_URL}...`)
 
   try {
     // Connect to the network
-    provider = new ethers.providers.WebSocketProvider(WEBSOCKET_URL)
+    provider = new ethers.providers.JsonRpcProvider(RPC_URL)
+
+    // Get all accounts
+    accounts = await provider.listAccounts()
+    console.log(`Found ${accounts.length} accounts`)
 
     // Read contract files
     const factoryBroadcastFile = join(

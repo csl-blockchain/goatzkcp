@@ -2,6 +2,11 @@ import dotenv from 'dotenv'
 import { join } from 'path'
 
 import {
+  checkMempool,
+  readContractABI,
+  readContractAddress,
+} from '../common/utils'
+import {
   CHAIN_ID,
   CONTRACT_DIR,
   FACTORY_CONTRACT_NAME,
@@ -11,7 +16,6 @@ import {
   RPC_URL,
   VERIFIER_CONTRACT_NAME,
 } from './constants'
-import { readContractABI, readContractAddress } from './utils'
 
 const { ethers } = require('ethers')
 
@@ -56,7 +60,9 @@ const lockAbiFile = join(
 )
 
 // Connect to the network
-const provider = new ethers.providers.JsonRpcProvider(RPC_URL)
+const provider = new ethers.providers.WebSocketProvider(RPC_URL)
+
+checkMempool({ provider })
 
 /* ------ SCENARIO DATA ------ */
 
@@ -67,6 +73,9 @@ const PRICE = 80
 const BUYER = ACCOUNTS[0]
 const SELLER = ACCOUNTS[1]
 
+console.log(`Buyer address: ${BUYER}`)
+console.log(`Seller address: ${SELLER}\n`)
+
 const BUYER_SIGNER = provider.getSigner(BUYER)
 const SELLER_SIGNER = provider.getSigner(SELLER)
 
@@ -76,23 +85,36 @@ let SELLER_BALANCE = await provider.getBalance(SELLER)
 // console.log(`List of accounts: ${ACCOUNTS}`)
 console.log(`Initial buyer balance: ${ethers.utils.formatEther(BUYER_BALANCE)}`)
 console.log(
-  `Initial seller balance: ${ethers.utils.formatEther(SELLER_BALANCE)}`
+  `Initial seller balance: ${ethers.utils.formatEther(SELLER_BALANCE)}\n`
 )
 
 /* ----- CONTRACT SETUP ----- */
 
 // Factory Contract - Initialization
 // https://ethereum.stackexchange.com/a/134733
+const FACTORY_ADDRESS = readContractAddress(
+  factoryBroadcastFile,
+  FACTORY_CONTRACT_NAME
+)
 const factoryContract = new ethers.Contract(
-  readContractAddress(factoryBroadcastFile, FACTORY_CONTRACT_NAME),
+  FACTORY_ADDRESS,
   readContractABI(factoryAbiFile),
   provider
 )
 const factoryContractWithBuyer = factoryContract.connect(BUYER_SIGNER)
+console.log(`Factory address: ${FACTORY_ADDRESS}`)
+
+// Verifier Contract - Initialization
+const VERIFIER = readContractAddress(
+  verifierBroadcastFile,
+  VERIFIER_CONTRACT_NAME
+)
+console.log(`Verifier address: ${VERIFIER}`)
 
 // Factory Contract - Create Ex change
 const tx_createExchange = await factoryContractWithBuyer.createExchange(
   SELLER,
+  VERIFIER,
   PRICE,
   {
     gasLimit: GAS_LIMIT,
@@ -118,18 +140,8 @@ const judgeContractWithSeller = new ethers.Contract(
 )
 const JUDGE_SIGNER = provider.getSigner(JUDGE_ADDRESS)
 
-// Judge Contract - Set Verifer
-const VERIFIER_ADDRESS = readContractAddress(
-  verifierBroadcastFile,
-  VERIFIER_CONTRACT_NAME
-)
-const tx_setVerifier =
-  await judgeContractWithSeller.setVerifier(VERIFIER_ADDRESS)
-const receipt_setVerifier = await tx_setVerifier.wait()
-const event_setVerifier = receipt_setVerifier.events?.find(
-  (e: any) => e.event === 'ExchangeSetVerifier'
-)
-console.log(`Verifier address: ${VERIFIER_ADDRESS}`)
+
+
 
 /* ----- SCENARIO START ----- */
 
@@ -139,8 +151,7 @@ console.log(`Judge status: ${judgeStatus}\n`)
 
 // 1. Seller creates hz and c and sends it to the Buyer through conventional methods of communication
 //    Hash is of type _bytes32
-const hashZ =
-  '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef' // replace with actual hash
+const hashZ = '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef' // replace with actual hash
 
 // 2. Buyer independently verifies hz, then sends hz and the payment to the Judge which in turn will create a Lock contract to lock the payment
 
