@@ -154,6 +154,8 @@ async function verify(
   displayTransaction(plaintextTx, _.find(abi, { name: 'verify' }))
   displayTransaction(shieldedTx, _.find(abi, { name: 'verify' }), true)
   displayTransaction(shieldedTx, undefined, true)
+  console.log(plaintextTx)
+  console.log(shieldedTx)
   await walletClient.waitForTransactionReceipt({
     hash: txHash,
   })
@@ -235,8 +237,9 @@ async function main() {
     '0x0000000000000000000000000000000000000000000000000000000000000000',
     '0x0000000000000000000000000000000000000000000000000000000000000001',
   ]
-  const keyBytes = toBytes(1, { size: 32 })
+  const keyBytes = toBytes(23062003, { size: 32 })
   const key = toHex(keyBytes)
+  console.log(key)
 
   const factoryBroadcastFile = join(
     CONTRACT_DIR,
