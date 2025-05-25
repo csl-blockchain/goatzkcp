@@ -170,19 +170,6 @@ P2SH_UNSPENT_BEFORE=$(bitcoin-cli -regtest -rpcwallet=buyerwallet listunspent 0 
 echo "[*] Seller creating redemption transaction..."
 python3 zkcp_no_timelock_tx.py "$REAL_K" "$REDEEM_SCRIPT" "$UTXO_TXID" "$VOUT" $AMOUNT
 
-PREIMAGE_HEX="23062003"
-
-RAW_TX=$(bitcoin-cli -regtest -rpcwallet=sellerwallet createrawtransaction "[]" "[{\"data\":\"$PREIMAGE_HEX\"}]")
-FUNDED_TX=$(bitcoin-cli -regtest -rpcwallet=sellerwallet fundrawtransaction "$RAW_TX" | jq -r .hex)
-SIGNED_TX=$(bitcoin-cli -regtest -rpcwallet=sellerwallet signrawtransactionwithwallet "$FUNDED_TX" | jq -r .hex)
-TXID=$(bitcoin-cli -regtest sendrawtransaction "$SIGNED_TX")
-echo "Broadcasted TXID with preimage: $TXID"
-
-bitcoin-cli -regtest getrawtransaction "$TXID" true
-
-# Show mempool after redemption transaction
-check_mempool "redemption transaction"
-
 # Mine confirmation blocks
 # echo "[*] Mining confirmation blocks..."
 # bitcoin-cli -regtest generatetoaddress 6 $seller_address > /dev/null 2>&1
