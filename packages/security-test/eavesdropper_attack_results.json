@@ -1,0 +1,33 @@
+{
+    "nama_simulasi": "Eavesdropper Attack Simulation",
+    "skenario_zkcp": {
+        "deskripsi": "Simulasi serangan pada ZKCP di jaringan publik.",
+        "kunci_asli": "syUJ08R1aFez2drwmX7FaVMqF-1SqvVmqPUBB1tDBEo=",
+        "data_yang_disadap": {
+            "ciphertext": "gAAAAABoMylIPMFYVTC4SlPDh2tPM7o0t8AkZt7mKZ4LMTWvClhpbrDCaegMgLK0j7I6fB_ygB6v5LYGk390v46Tv4cOvFUiww==",
+            "kunci_plaintext": "syUJ08R1aFez2drwmX7FaVMqF-1SqvVmqPUBB1tDBEo="
+        },
+        "hasil_dekripsi_penyerang": "1 3 1 4 2",
+        "kesimpulan": {
+            "status_serangan": "BERHASIL",
+            "analisis": "Serangan berhasil karena kunci dekripsi dipublikasikan dalam bentuk plaintext, memungkinkan rekonstruksi data rahasia."
+        }
+    },
+    "skenario_goatzkcp": {
+        "deskripsi": "Simulasi serangan pada GoatZKCP dengan pertahanan berlapis.",
+        "kunci_yang_terlibat": {
+            "kunci_inner_rahasia_k_prime": "jXbKdC4HZjhLvWT2QcmsNBnKfvJlx6zuimzPOd9oEx8= (Tidak Pernah Publik)",
+            "kunci_outer_publik_k": "Rpme0Glkv8JN7zteGNjFI_zf3ieiBuXay1z_heDfysU=",
+            "kunci_infrastruktur_seismic": "oUgVeLYGp0UBXzeibfvM9gYTYkWQe4hHDg1mnd9yV0E= (Tidak Pernah Publik)"
+        },
+        "data_yang_disadap": {
+            "ciphertext_ganda": "gAAAAABoMylIYlojUQmRHgspKCgG3B2PdV_ukDiZaBhAFT66tuEValieoqZgncOZnuvNDACpySixcmXP3VCfBYRJ5w6JP1dLQzT87Cij7Vy6d6DGjqY0SvFwURsHJUodvab1PUMA2fVW8uYHQxiiQBfHKY2Yo3pLevLQANlw78sWgoQ_ovRGodGuMf5nP-UrxdHMC6MIU_x4vrmetxrM57uskf0FkFgCRg==",
+            "kunci_k_terenkripsi": "gAAAAABoMylImYQay7Dj_vIBtxppScx0BRNzKmLJ2eZKH40qSf_jLfNORIXPSAuaqYDA1nI52WIgEBdeBIFB9pmrPz4i6e_wod4yRFtzn8zxJKfSVQKe12YlEaRUHJwrWmSimF9vL5U1"
+        },
+        "hasil_dekripsi_penyerang": "[DECRYPTION FAILED] Kunci salah atau token tidak valid.",
+        "kesimpulan": {
+            "status_serangan": "GAGAL",
+            "analisis": "Serangan gagal total karena kunci 'k' dienkripsi oleh platform, dan data dilindungi oleh kunci rahasia 'k'' yang tidak pernah terekspos."
+        }
+    }
+}

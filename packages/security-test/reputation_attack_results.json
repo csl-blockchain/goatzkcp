@@ -1,0 +1,33 @@
+{
+    "nama_simulasi": "Reputation Attack Simulation",
+    "skenario_zkcp": {
+        "deskripsi": "Simulasi di mana pembeli jahat membuat klaim palsu setelah transaksi valid.",
+        "bukti_yang_tersedia": {
+            "sifat_bukti": "Subjektif",
+            "keterangan": "Hanya pembeli yang tahu hasil verifikasi. Tidak ada catatan publik yang bisa membantah klaim palsu."
+        },
+        "dampak_klaim_palsu": {
+            "status_sengketa": "Ambigius (Tidak Terselesaikan)",
+            "analisis": "Reputasi penjual dapat rusak karena tidak ada cara objektif untuk membuktikan kebenaran."
+        },
+        "kesimpulan": {
+            "status_serangan": "BERHASIL",
+            "alasan": "Verifikasi yang bersifat privat dan tidak adanya bukti on-chain menciptakan celah untuk manipulasi reputasi."
+        }
+    },
+    "skenario_goatzkcp": {
+        "deskripsi": "Simulasi klaim palsu yang sama pada GoatZKCP.",
+        "bukti_yang_tersedia": {
+            "sifat_bukti": "Objektif & Tidak Terbantahkan (Irrefutable)",
+            "keterangan": "Keberhasilan transaksi tercatat secara permanen di blockchain dengan hash: 0xb90faa583f46a510c3b119e1a06d7b5fca13bd66c7e25b8eade736d740890af4. Siapapun bisa memverifikasinya."
+        },
+        "dampak_klaim_palsu": {
+            "status_sengketa": "Terselesaikan (Klaim Terbantahkan)",
+            "analisis": "Penjual dapat dengan mudah membantah klaim palsu dengan menunjukkan bukti transaksi on-chain. Reputasi penjual aman."
+        },
+        "kesimpulan": {
+            "status_serangan": "GAGAL",
+            "alasan": "Verifikasi on-chain oleh smart contract menghilangkan subjektivitas dan menciptakan catatan publik yang dapat diaudit."
+        }
+    }
+}

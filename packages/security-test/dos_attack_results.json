@@ -1,0 +1,35 @@
+{
+    "nama_simulasi": "Denial of Service (DoS) Attack Simulation",
+    "skenario_zkcp": {
+        "deskripsi": "Simulasi DoS di mana penyerang meminta proof tanpa komitmen pembayaran.",
+        "biaya_penyerang": {
+            "nilai": 0,
+            "satuan": "ETH (simulasi)",
+            "analisis": "Penyerang tidak mengeluarkan biaya apa pun untuk melancarkan serangan."
+        },
+        "dampak_pada_penjual": {
+            "waktu_komputasi_terbuang_detik": 1.3,
+            "analisis": "Penjual membuang waktu dan sumber daya komputasi yang signifikan tanpa kompensasi."
+        },
+        "kesimpulan": {
+            "status_serangan": "BERHASIL",
+            "alasan": "Tidak ada mekanisme yang mewajibkan komitmen finansial dari pembeli sebelum penjual melakukan pekerjaan komputasi mahal."
+        }
+    },
+    "skenario_goatzkcp": {
+        "deskripsi": "Simulasi DoS pada GoatZKCP dengan mekanisme fund-locking prerequisite.",
+        "biaya_penyerang": {
+            "nilai": 0.005,
+            "satuan": "ETH (biaya gas simulasi)",
+            "analisis": "Penyerang harus mengeluarkan biaya untuk mencoba memulai serangan. Tanpa komitmen finansial, serangan tidak bisa dilanjutkan."
+        },
+        "dampak_pada_penjual": {
+            "waktu_komputasi_terbuang_detik": 0.0,
+            "analisis": "Penjual tidak melakukan komputasi apa pun karena dana belum terkunci. Sumber daya penjual aman."
+        },
+        "kesimpulan": {
+            "status_serangan": "GAGAL",
+            "alasan": "Mekanisme fund-locking prerequisite bertindak sebagai gerbang finansial, membuat serangan menjadi tidak praktis atau berubah menjadi transaksi yang sah."
+        }
+    }
+}
